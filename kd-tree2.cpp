@@ -1,6 +1,9 @@
 #include <iostream>
 #include <vector>
-
+#include <fstream>
+#include<sstream>
+#include<string>
+#include <algorithm>
 
 /* ## Sprint 1
 
@@ -95,16 +98,33 @@ class KDTree
 
 };
 
+void createFromFile(std::string file_name, KDTree *tree) {
+    std::string line;
+    std::ifstream my_file (file_name);
+    int x,y;
+    while (std::getline(my_file, line)) 
+    {
+        std::replace(line.begin(), line.end(), ',', ' ');
+        std::stringstream line_stream(line);
+        
+        line_stream >> x >> y;
+        tree->insert({x,y});
+    } 
+}
+
 int main()
 {
     KDTree *kdt = new KDTree;
-    kdt->insert({3,4});
-    //kdt->insert({2,3});
-    //kdt->insert({3,5});
+    // kdt->insert({3,4});
+    // kdt->insert({2,3});
+    // kdt->insert({3,5});
+
+    createFromFile("input.csv", kdt);
+    std::cout << kdt << std::endl;
     //std::cout<<kdt->root->vector[0]<<": was the root\n";
     //std::cout<<kdt->root->left->vector[1]<<": was the root\n";
     //std::cout<<kdt->root->right->vector[1]<<": was the root\n";
-    std::cout<<kdt->findMin(1)->vector[0]<<": was the left of the min";
+    // std::cout<<kdt->findMin(1)->vector[0]<<": was the left of the min";
 
 
 /*    
