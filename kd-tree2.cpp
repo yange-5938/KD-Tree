@@ -77,18 +77,39 @@ class KDTree
             }
         }
 
+        KDNode* minOfPoints(std::vector<KDNode*> points, int dim)
+        {
+            KDNode* min_el = NULL;
+            for (auto el : points)
+            {
+                if(min_el == NULL) {
+                    min_el = el;
+                } else if(el != NULL) {
+                    if (el->vector[dim] < min_el->vector[dim]) {
+                        min_el = el;
+                    }
+                }
+            }
+            return min_el;
+        }
+
         KDNode* findMin(int dim, KDNode* leaf){
-            if(leaf!=NULL){
-                if(dim == leaf->cuttingEdge){
-                    if(leaf->left == NULL) return leaf;
-                    else return findMin(dim, leaf->left);
+            if (leaf == NULL)
+                return NULL;
+
+
+            if(dim == leaf->cuttingEdge)
+                {
+                    if(leaf->left == NULL) 
+                        return leaf;
+                    else 
+                        return findMin(dim, leaf->left);
                 }
-                else {
-                    if(findMin(dim,leaf->left) == NULL) return findMin(dim,leaf->right);
-                    else if(findMin(dim,leaf->right) == NULL) return findMin(dim,leaf->left);
-                    else return std::min(findMin(dim,leaf->left), findMin(dim,leaf->right));
+            else
+                {
+
+                    return this->minOfPoints({findMin(dim, leaf->right), findMin(dim, leaf->left), leaf}, dim);
                 }
-            } else return NULL;
         }
 
         // root of the tree
@@ -117,14 +138,14 @@ int main()
     KDTree *kdt = new KDTree;
     // kdt->insert({3,4});
     // kdt->insert({2,3});
-    // kdt->insert({3,5});
+    // // kdt->insert({3,5});
 
     createFromFile("input.csv", kdt);
-    std::cout << kdt << std::endl;
+    // std::cout << kdt << std::endl;
     //std::cout<<kdt->root->vector[0]<<": was the root\n";
     //std::cout<<kdt->root->left->vector[1]<<": was the root\n";
     //std::cout<<kdt->root->right->vector[1]<<": was the root\n";
-    // std::cout<<kdt->findMin(1)->vector[0]<<": was the left of the min";
+    auto x = kdt->findMin(1);
 
 
 /*    
