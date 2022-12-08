@@ -29,7 +29,7 @@ struct KDNode{
 class KDTree
 {
     public:
-        KDNode *root;
+  
         // Constructor
         KDTree(){
             root = NULL;
@@ -89,6 +89,7 @@ class KDTree
         }
 
         // root of the tree
+        KDNode *root;
 
 
 
