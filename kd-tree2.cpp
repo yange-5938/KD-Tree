@@ -4,7 +4,6 @@
 #include <sstream>
 #include <string>
 #include <algorithm>
-#include <cassert>
 
 /* ## Sprint 1
 
@@ -80,7 +79,49 @@ public:
         return findMin(dim, root);
     }
 
+    KDNode *deleteNode(std::vector<int> point)
+    {
+        return deleteNode(point, this->root);
+    }
+
+
+    KDNode *deleteNode(std::vector<int> point, KDNode *leaf)
+        {
+            if (leaf == NULL)
+                throw "point not found!";
+            
+            if (point == leaf->vector)
+            {
+                if (leaf->right != NULL)
+                {
+                    leaf->vector = findMin(leaf->cuttingEdge, leaf->right)->vector;
+                    leaf->right = deleteNode(leaf->vector, leaf->right);
+                }
+                else if (leaf->left != NULL)
+                {
+                    leaf->vector = findMin(leaf->cuttingEdge, leaf->left)->vector;
+                    leaf->right = deleteNode(leaf->vector, leaf->left);
+                }
+                else 
+                {
+                    leaf = NULL;
+                }
+
+            }
+            else if (point[leaf->cuttingEdge] < leaf->vector[leaf->cuttingEdge])
+            {
+                leaf->left = deleteNode(point, leaf->left);
+            }
+            else
+            {
+                leaf->right = deleteNode(point, leaf->right);
+            }
+            return leaf;
+        }
+
 private:
+
+    
     void insert(std::vector<int> vec, KDNode *leaf)
     {
         if (vec[leaf->cuttingEdge] < leaf->vector[leaf->cuttingEdge])
@@ -130,26 +171,9 @@ private:
         }
     }
     
-        // delet a giving node, return the KDtree without this node
-        void deleteNode(KDNode* node){
-            assert(node != NULL);
-            // case: when the right branch of node is not null
-            if(node->right != NULL){
-                KDNode* rightMin = findMin(node->cuttingEdge,node->right);
-                node->vector = rightMin->vector;
-                deleteNode(rightMin);
-            } 
-            // case: when the left branch is not null
-            else if(node->left != NULL){
-                KDNode* leftMin = findMin(node->cuttingEdge, node->left);
-                node->vector = leftMin->vector;
-                deleteNode(leftMin);
-                node->right = node->left;
-                node->left = NULL;
-            } 
-            // to be deleted Node is a leaf
-            else node = NULL;
-        }
+    // root of the tree
+    KDNode *root;
+};
 
 void createFromFile(std::string file_name, KDTree *tree)
 {
