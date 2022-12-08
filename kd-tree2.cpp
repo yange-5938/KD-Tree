@@ -82,8 +82,8 @@ class KDTree
                 }
                 else {
                     if(findMin(dim,leaf->left) == NULL) return findMin(dim,leaf->right);
-                    if(findMin(dim,leaf->right) == NULL) return findMin(dim,leaf->left);
-                    return std::min(findMin(dim,leaf->left), findMin(dim,leaf->right));
+                    else if(findMin(dim,leaf->right) == NULL) return findMin(dim,leaf->left);
+                    else return std::min(findMin(dim,leaf->left), findMin(dim,leaf->right));
                 }
             } else return NULL;
         }
