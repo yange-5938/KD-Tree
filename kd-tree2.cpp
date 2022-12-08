@@ -129,6 +129,41 @@ private:
         }
     }
 
+    
+    KDNode *deleteNode(std::vector<int> point, KDNode *leaf)
+        {
+            if (leaf == NULL)
+                throw "point not found!";
+            
+            if (point == leaf->vector)
+            {
+                if (leaf->right != NULL)
+                {
+                    leaf->vector = findMin(leaf->cuttingEdge, leaf->right);
+                    leaf->right = deleteNode(leaf->vector, leaf->right);
+                }
+                else if (leaf->left != NULL)
+                {
+                    leaf->vector = findMin(leaf->cuttingEdge, leaf->left);
+                    leaf->right = deleteNode(leaf->vector, leaf->left);
+                }
+                else 
+                {
+                    leaf = NULL;
+                }
+
+            }
+            else if (point[leaf->cuttingEdge] < leaf->vector[leaf->cuttingEdge])
+            {
+                leaf->left = deleteNode(point, leaf->left);
+            }
+            else
+            {
+                leaf->right = deleteNode(point, leaf->right);
+            }
+            return leaf;
+        }
+    
     // root of the tree
     KDNode *root;
 };
@@ -156,4 +191,7 @@ int main()
     int dim = 0;
     auto x = kdt->findMin(dim);
     std::cout << "min Point on dimension " << dim <<": [" << x->vector[0] << "," << x->vector[1] << "]" << "\n";
+
+    kdt->deleteNode({50,30});
+    std::cout << kdt << "\n";
 }
