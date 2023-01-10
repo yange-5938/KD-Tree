@@ -60,6 +60,7 @@ public:
         root = NULL;
     }
 
+
     void insert(std::vector<int> vec)
     {
         if (root != NULL)
@@ -72,6 +73,19 @@ public:
             root->left = NULL;
             root->right = NULL;
         }
+    }
+
+    // public method for printing the tree
+    // eg.
+    // ├──(30 , 40)
+    // │   ├──(5 , 25)
+    // │   │   ├──(10 , 12)
+    // │   │   └──(2 , 30)
+    // │   └──(70 , 70)
+    // │       ├──(50 , 30)
+    // │       └──(35 , 100)
+    void printKDT(){
+        printKDT("", this->root, true);
     }
 
     KDNode *findMin(int dim)
@@ -118,10 +132,28 @@ public:
             }
             return leaf;
         }
+        
+    
 
 private:
 
-    
+    // this method print the kd-tree in terminal
+    void printKDT(const std::string& prefix, const KDNode* node, bool isLeft){
+    if (node != nullptr){
+        std::cout << prefix;
+        
+        std::cout << (isLeft ? "├──" : "└──");
+
+        // print the value of the node
+        std::cout << "(" << node->vector.at(0) << " , "<< node->vector.at(1) << ")"<< std::endl;
+
+        // enter the next tree level - left and right branch
+        printKDT( prefix + (isLeft ? "│   " : "    "), node->left, true);
+        printKDT( prefix + (isLeft ? "│   " : "    "), node->right, false);
+        }
+    }
+
+
     void insert(std::vector<int> vec, KDNode *leaf)
     {
         if (vec[leaf->cuttingEdge] < leaf->vector[leaf->cuttingEdge])
@@ -190,15 +222,19 @@ void createFromFile(std::string file_name, KDTree *tree)
     }
 }
 
+
+
 int main()
 {
     KDTree *kdt = new KDTree;
     createFromFile("input.csv", kdt);
+    
+    kdt->printKDT();
 
-    int dim = 0;
+/*     int dim = 0;
     auto x = kdt->findMin(dim);
     std::cout << "min Point on dimension " << dim <<": [" << x->vector[0] << "," << x->vector[1] << "]" << "\n";
 
     kdt->deleteNode({50,30});
-    std::cout << kdt << "\n";
+    std::cout << kdt << "\n"; */
 }

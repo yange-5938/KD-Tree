@@ -1,6 +1,6 @@
 # kd-tree
 
-## what's a kd-tree
+## what's a kd-tree?
 [kd-tree](https://en.wikipedia.org/wiki/K-d_tree) is like a normal tree, but it's kd.
 
 ## how to build: 
