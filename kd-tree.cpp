@@ -5,6 +5,7 @@
 #include <string>
 #include <algorithm>
 #include <stdexcept>
+#include <memory>
 
 // for sprint-1 we only talk about vector with 2 dimension
 const int DIM = 2;
@@ -195,9 +196,9 @@ private:
 };
 
 // this method creats a KD-Tree and it inserts all the points from the file to the tree
-KDTree *createKDTreeFromFile(std::string file_name)
+std::unique_ptr<KDTree> createKDTreeFromFile(std::string file_name)
 {
-    KDTree *tree = new KDTree;
+    auto tree = std::make_unique<KDTree>() ;
     std::string line;
     std::ifstream my_file(file_name);
     int x, y;
@@ -207,6 +208,7 @@ KDTree *createKDTreeFromFile(std::string file_name)
         std::stringstream line_stream(line);
 
         line_stream >> x >> y;
+
         tree->insert({x,
                       y});
     }
@@ -215,7 +217,7 @@ KDTree *createKDTreeFromFile(std::string file_name)
 
 int main()
 {
-    KDTree *kdt = createKDTreeFromFile("input.csv");
+    auto kdt = createKDTreeFromFile("input.csv");
 
     kdt->printKDT();
 
@@ -226,7 +228,7 @@ int main()
     std::cout << "min Point on dimension 1 is: [" << y->vector[0] << "," << y->vector[1] << "]"
               << "\n";
 
-    std::cout << "now we demonstrate the delete node function, type in a 2d-vector (eg. 2 and then 3)to delete: \n";
+    std::cout << "now we demonstrate the delete node function, type in a 2d-vector to delete: \n";
     std::cout << "type the first cordinate: \n";
     int first;
     std::cin >> first;
