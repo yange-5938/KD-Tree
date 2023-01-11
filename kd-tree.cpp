@@ -98,40 +98,6 @@ public:
         return deleteNode(point, this->root);
     }
 
-
-    KDNode *deleteNode(std::vector<int> point, KDNode *leaf)
-        {
-            if (leaf == NULL)
-                throw "point not found!";
-            
-            if (point == leaf->vector)
-            {
-                if (leaf->right != NULL)
-                {
-                    leaf->vector = findMin(leaf->cuttingEdge, leaf->right)->vector;
-                    leaf->right = deleteNode(leaf->vector, leaf->right);
-                }
-                else if (leaf->left != NULL)
-                {
-                    leaf->vector = findMin(leaf->cuttingEdge, leaf->left)->vector;
-                    leaf->right = deleteNode(leaf->vector, leaf->left);
-                }
-                else 
-                {
-                    leaf = NULL;
-                }
-
-            }
-            else if (point[leaf->cuttingEdge] < leaf->vector[leaf->cuttingEdge])
-            {
-                leaf->left = deleteNode(point, leaf->left);
-            }
-            else
-            {
-                leaf->right = deleteNode(point, leaf->right);
-            }
-            return leaf;
-        }
         
     
 
@@ -142,7 +108,7 @@ private:
     if (node != nullptr){
         std::cout << prefix;
         
-        std::cout << (isLeft ? "├──" : "└──");
+        std::cout << (isLeft ? "├─l─" : "└─r─");
 
         // print the value of the node
         std::cout << "(" << node->vector.at(0) << " , "<< node->vector.at(1) << ")"<< std::endl;
@@ -202,13 +168,50 @@ private:
             return KDTree::minOfPoints({findMin(dim, leaf->right), findMin(dim, leaf->left), leaf}, dim);
         }
     }
+
+        KDNode *deleteNode(std::vector<int> point, KDNode *leaf)
+        {
+            if (leaf == nullptr)
+                throw "point not found!";
+            
+            if (point == leaf->vector)
+            {
+                if (leaf->right != nullptr)
+                {
+                    leaf->vector = findMin(leaf->cuttingEdge, leaf->right)->vector;
+                    leaf->right = deleteNode(leaf->vector, leaf->right);
+                }
+                else if (leaf->left != nullptr)
+                {
+                    leaf->vector = findMin(leaf->cuttingEdge, leaf->left)->vector;
+                    leaf->right = deleteNode(leaf->vector, leaf->left);
+                    leaf->left = nullptr;
+                }
+                else 
+                {
+                    leaf = nullptr;
+                }
+
+            }
+            else if (point[leaf->cuttingEdge] < leaf->vector[leaf->cuttingEdge])
+            {
+                leaf->left = deleteNode(point, leaf->left);
+            }
+            else
+            {
+                leaf->right = deleteNode(point, leaf->right);
+            }
+            return leaf;
+        }
     
     // root of the tree
     KDNode *root;
 };
 
-void createFromFile(std::string file_name, KDTree *tree)
+// this method creats a KD-Tree and it inserts all the points from the file to the tree
+KDTree* createKDTreeFromFile(std::string file_name)
 {
+    KDTree *tree = new KDTree;
     std::string line;
     std::ifstream my_file(file_name);
     int x, y;
@@ -220,21 +223,24 @@ void createFromFile(std::string file_name, KDTree *tree)
         line_stream >> x >> y;
         tree->insert({x, y});
     }
+    return tree;
 }
 
 
 
 int main()
 {
-    KDTree *kdt = new KDTree;
-    createFromFile("input.csv", kdt);
+    KDTree* kdt = createKDTreeFromFile("input.csv");
     
     kdt->printKDT();
 
-/*     int dim = 0;
-    auto x = kdt->findMin(dim);
-    std::cout << "min Point on dimension " << dim <<": [" << x->vector[0] << "," << x->vector[1] << "]" << "\n";
+    auto x = kdt->findMin(0);
+    auto y = kdt->findMin(1);
+    std::cout << "min Point on dimension 0 is: [" << x->vector[0] << "," << x->vector[1] << "]" << "\n";
+    std::cout << "min Point on dimension 1 is: [" << y->vector[0] << "," << y->vector[1] << "]" << "\n";
 
-    kdt->deleteNode({50,30});
-    std::cout << kdt << "\n"; */
+    std::cout << "now we delete a point \n";
+    kdt->deleteNode({30,40});
+    kdt->printKDT(); 
+    
 }
