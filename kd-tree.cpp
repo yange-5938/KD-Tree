@@ -239,8 +239,15 @@ int main()
     std::cout << "min Point on dimension 0 is: [" << x->vector[0] << "," << x->vector[1] << "]" << "\n";
     std::cout << "min Point on dimension 1 is: [" << y->vector[0] << "," << y->vector[1] << "]" << "\n";
 
-    std::cout << "now we delete a point \n";
-    kdt->deleteNode({30,40});
+    std::cout << "now we demonstrate the delete node function, type in a 2d-vector (eg. 2 and then 3)to delete: \n";
+    std::cout << "type the first cordinate: \n";
+    int first;
+    std::cin >> first;
+
+    std::cout << "now type the second cordinate: \n";
+    int second;
+    std::cin >> second;
+    kdt->deleteNode({first,second});
     kdt->printKDT(); 
     
 }
