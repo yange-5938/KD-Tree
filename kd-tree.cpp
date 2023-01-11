@@ -6,16 +6,7 @@
 #include <algorithm>
 #include <stdexcept>
 
-/* ## Sprint 1
-
-Create a kd-tree data structure to store data with dimensionality k = 2, hence creating a 2D-tree. Optionally you can choose to go for k = 3 or k being variable.
-
-### Definion of "done"
-
-* Kd-tree can be constructed
-* Points can be added and deleted
-* Points can be read in from file */
-
+// for sprint-1 we only talk about vector with 2 dimension
 const int DIM = 2;
 
 // KDNode is a node or a leaf in KD-tree
@@ -36,14 +27,14 @@ class KDTree
 
     KDNode* minOfPoints(std::vector<KDNode *> points, int dim)
     {
-        KDNode *min_el = NULL;
+        KDNode *min_el = nullptr;
         for (auto point : points)
         {
-            if (min_el == NULL)
+            if (min_el == nullptr)
             {
                 min_el = point;
             }
-            else if (point != NULL)
+            else if (point != nullptr)
             {
                 if (point->vector[dim] < min_el->vector[dim])
                 {
@@ -58,21 +49,21 @@ public:
     // Constructor
     KDTree()
     {
-        root = NULL;
+        root = nullptr;
     }
 
 
     void insert(std::vector<int> vec)
     {
-        if (root != NULL)
+        if (root != nullptr)
             insert(vec, root);
         else
         {
             root = new KDNode;
             root->cuttingEdge = 0;
             root->vector = vec;
-            root->left = NULL;
-            root->right = NULL;
+            root->left = nullptr;
+            root->right = nullptr;
         }
     }
 
@@ -125,40 +116,40 @@ private:
     {
         if (vec[leaf->cuttingEdge] < leaf->vector[leaf->cuttingEdge])
         {
-            if (leaf->left != NULL)
+            if (leaf->left != nullptr)
                 insert(vec, leaf->left);
             else
             {
                 leaf->left = new KDNode;
                 leaf->left->vector = vec;
                 leaf->left->cuttingEdge = (leaf->cuttingEdge + 1) % DIM;
-                leaf->left->left = NULL;  // Sets the left child of the child node to null
-                leaf->left->right = NULL; // Sets the right child of the child node to null
+                leaf->left->left = nullptr;  // Sets the left child of the child node to null
+                leaf->left->right = nullptr; // Sets the right child of the child node to null
             }
         }
         else if (vec[leaf->cuttingEdge] >= leaf->vector[leaf->cuttingEdge])
         {
-            if (leaf->right != NULL)
+            if (leaf->right != nullptr)
                 insert(vec, leaf->right);
             else
             {
                 leaf->right = new KDNode;
                 leaf->right->vector = vec;
                 leaf->right->cuttingEdge = (leaf->cuttingEdge + 1) % DIM;
-                leaf->right->left = NULL;  // Sets the left child of the child node to null
-                leaf->right->right = NULL; // Sets the right child of the child node to null
+                leaf->right->left = nullptr;  // Sets the left child of the child node to null
+                leaf->right->right = nullptr; // Sets the right child of the child node to null
             }
         }
     }
 
     KDNode *findMin(int dim, KDNode *leaf)
     {
-        if (leaf == NULL)
-            return NULL;
+        if (leaf == nullptr)
+            return nullptr;
 
         if (dim == leaf->cuttingEdge)
         {
-            if (leaf->left == NULL)
+            if (leaf->left == nullptr)
                 return leaf;
             else
                 return findMin(dim, leaf->left);
