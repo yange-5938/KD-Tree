@@ -4,6 +4,7 @@
 #include <sstream>
 #include <string>
 #include <algorithm>
+#include <stdexcept>
 
 /* ## Sprint 1
 
@@ -172,6 +173,7 @@ private:
         KDNode *deleteNode(std::vector<int> point, KDNode *leaf)
         {
             if (leaf == nullptr)
+
                 throw "point not found!";
             
             if (point == leaf->vector)
@@ -247,7 +249,15 @@ int main()
     std::cout << "now type the second cordinate: \n";
     int second;
     std::cin >> second;
-    kdt->deleteNode({first,second});
+    try{
+        kdt->deleteNode({first,second});
+    } catch (
+        const char* msg
+    ){
+        std::cout << msg << "\n"; 
+        return 1;
+    }
+    
     kdt->printKDT(); 
     
 }
