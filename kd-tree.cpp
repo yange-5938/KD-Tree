@@ -26,6 +26,7 @@ struct KDNode
 class KDTree
 {
 
+    // public methods are for external use, it hides implementation details.
 public:
     // Constructor, points root to null.
     KDTree()
@@ -33,6 +34,7 @@ public:
         root = nullptr;
     }
 
+    // insert a vector into the kd-tree
     void insert(std::vector<int> vec)
     {
         if (root != nullptr)
@@ -47,28 +49,29 @@ public:
         }
     }
 
-    // public method for printing the tree
+    // printing the tree in the terminal
     void printKDT()
     {
         printKDT("", this->root, true);
     }
 
+    // return the vector which has the minumun number of the given dimension
     KDNode *findMin(int dim)
     {
         return findMin(dim, root);
     }
 
+    // delete the node, which stores the exactly same vector
     KDNode *deleteNode(std::vector<int> point)
     {
         return deleteNode(point, this->root);
     }
 
 private:
-
     // root of the tree
     KDNode *root;
 
-    // this function returns minimun KDNode in the vector
+    // private returns minimun KDNode in the vector
     KDNode *minOfPoints(std::vector<KDNode *> points, int dim)
     {
         KDNode *min_el = nullptr;
@@ -89,7 +92,7 @@ private:
         return min_el;
     }
 
-    // this method print the kd-tree in terminal
+    // private method prints the kd-tree in terminal
     void printKDT(const std::string &prefix,
                   const KDNode *node, bool isLeft)
     {
@@ -108,6 +111,7 @@ private:
         }
     }
 
+    // private method inserts a vector into the kd-tree
     void insert(std::vector<int> vec, KDNode *leaf)
     {
         if (vec[leaf->cuttingEdge] < leaf->vector[leaf->cuttingEdge])
@@ -137,7 +141,7 @@ private:
             }
         }
     }
-
+    // private method returns the vector which has the minumun number of the given dimension
     KDNode *findMin(int dim, KDNode *leaf)
     {
         if (leaf == nullptr)
@@ -160,6 +164,7 @@ private:
         }
     }
 
+    // private method deletes the node, which stores the exactly same vector
     KDNode *deleteNode(std::vector<int> point, KDNode *leaf)
     {
         if (leaf == nullptr)
@@ -199,7 +204,7 @@ private:
 // this method creats a KD-Tree and it inserts all the points from the file to the tree
 std::unique_ptr<KDTree> createKDTreeFromFile(std::string file_name)
 {
-    auto tree = std::make_unique<KDTree>() ;
+    auto tree = std::make_unique<KDTree>();
     std::string line;
     std::ifstream my_file(file_name);
     int x, y;
@@ -218,10 +223,13 @@ std::unique_ptr<KDTree> createKDTreeFromFile(std::string file_name)
 
 int main()
 {
+    // creates kd-tree from file
     auto kdt = createKDTreeFromFile("input.csv");
 
+    // print it to terminal
     kdt->printKDT();
 
+    // print the minumun vector in each dimension
     auto x = kdt->findMin(0);
     auto y = kdt->findMin(1);
     std::cout << "min Point on dimension 0 is: [" << x->vector[0] << "," << x->vector[1] << "]"
@@ -229,6 +237,8 @@ int main()
     std::cout << "min Point on dimension 1 is: [" << y->vector[0] << "," << y->vector[1] << "]"
               << "\n";
 
+
+    // delete a vector to demonstrate
     std::cout << "now we demonstrate the delete node function, type in a 2d-vector to delete: \n";
     std::cout << "type the first cordinate: \n";
     int first;
@@ -249,5 +259,6 @@ int main()
         return 1;
     }
 
+    // print the tree again after the deletion
     kdt->printKDT();
 }
