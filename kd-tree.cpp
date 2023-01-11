@@ -25,6 +25,51 @@ struct KDNode
 class KDTree
 {
 
+
+
+public:
+    // Constructor
+    /* KDTree()
+    {
+        root = nullptr;
+    } */
+
+
+    void insert(std::vector<int> vec)
+    {
+        if (root != nullptr)
+            insert(vec, root);
+        else
+        {
+            root = new KDNode;
+            root->cuttingEdge = 0;
+            root->vector = vec;
+            root->left = nullptr;
+            root->right = nullptr;
+        }
+    }
+
+    // public method for printing the tree
+    void printKDT(){
+        printKDT("", this->root, true);
+    }
+
+    KDNode *findMin(int dim)
+    {
+        return findMin(dim, root);
+    }
+
+    KDNode *deleteNode(std::vector<int> point)
+    {
+        return deleteNode(point, this->root);
+    }
+
+        
+    
+
+private:
+
+    // this function returns minimun KDNode in the vector
     KDNode* minOfPoints(std::vector<KDNode *> points, int dim)
     {
         KDNode *min_el = nullptr;
@@ -44,56 +89,6 @@ class KDTree
         }
         return min_el;
     }
-
-public:
-    // Constructor
-    KDTree()
-    {
-        root = nullptr;
-    }
-
-
-    void insert(std::vector<int> vec)
-    {
-        if (root != nullptr)
-            insert(vec, root);
-        else
-        {
-            root = new KDNode;
-            root->cuttingEdge = 0;
-            root->vector = vec;
-            root->left = nullptr;
-            root->right = nullptr;
-        }
-    }
-
-    // public method for printing the tree
-    // eg.
-    // ├──(30 , 40)
-    // │   ├──(5 , 25)
-    // │   │   ├──(10 , 12)
-    // │   │   └──(2 , 30)
-    // │   └──(70 , 70)
-    // │       ├──(50 , 30)
-    // │       └──(35 , 100)
-    void printKDT(){
-        printKDT("", this->root, true);
-    }
-
-    KDNode *findMin(int dim)
-    {
-        return findMin(dim, root);
-    }
-
-    KDNode *deleteNode(std::vector<int> point)
-    {
-        return deleteNode(point, this->root);
-    }
-
-        
-    
-
-private:
 
     // this method print the kd-tree in terminal
     void printKDT(const std::string& prefix, const KDNode* node, bool isLeft){
