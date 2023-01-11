@@ -64,6 +64,10 @@ public:
     }
 
 private:
+
+    // root of the tree
+    KDNode *root;
+
     // this function returns minimun KDNode in the vector
     KDNode *minOfPoints(std::vector<KDNode *> points, int dim)
     {
@@ -190,9 +194,6 @@ private:
         }
         return leaf;
     }
-
-    // root of the tree
-    KDNode *root;
 };
 
 // this method creats a KD-Tree and it inserts all the points from the file to the tree
