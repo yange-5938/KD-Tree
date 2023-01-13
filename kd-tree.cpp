@@ -224,7 +224,7 @@ std::unique_ptr<KDTree> createKDTreeFromFile(std::string file_name)
 int main()
 {
     // creates kd-tree from file
-    auto kdt = createKDTreeFromFile("input.csv");
+    auto kdt = createKDTreeFromFile("data/points.csv");
 
     // print it to terminal
     kdt->printKDT();
