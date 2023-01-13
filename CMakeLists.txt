@@ -1,6 +1,6 @@
+CMAKE_MINIMUM_REQUIRED(VERSION 3.21)
 project(KD-tree)
-cmake_minimum_required(VERSION 3.21)
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 20)
 
 add_subdirectory(src)
-add_library(test)
+add_subdirectory(test)

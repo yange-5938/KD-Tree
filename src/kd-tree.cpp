@@ -24,9 +24,9 @@ void KDTree::insert(const std::vector<int> &vec)
     }
   }
 
-std::unique_ptr<KDTree> KDTree::createKDTreeFromFile(std::string file_name)
+std::unique_ptr<KDTree> KDTree::createKDTreeFromFile(std::string file_name, int dims)
   {
-    auto tree = std::make_unique<KDTree>();
+    auto tree = std::make_unique<KDTree>(dims);
     std::string line;
     std::ifstream my_file(file_name);
     int x, y;
@@ -72,7 +72,7 @@ void KDTree::insert(std::vector<int> vec, KDNode *leaf)
     {
       leaf->left = new KDNode;
       leaf->left->vector = vec;
-      leaf->left->cuttingEdge = (leaf->cuttingEdge + 1) % DIM;
+      leaf->left->cuttingEdge = (leaf->cuttingEdge + 1) % this->DIM;
       leaf->left->left = nullptr;  // Sets the left child of the child node to null
       leaf->left->right = nullptr; // Sets the right child of the child node to null
     }
@@ -87,7 +87,7 @@ void KDTree::insert(std::vector<int> vec, KDNode *leaf)
     {
       leaf->right = new KDNode;
       leaf->right->vector = vec;
-      leaf->right->cuttingEdge = (leaf->cuttingEdge + 1) % DIM;
+      leaf->right->cuttingEdge = (leaf->cuttingEdge + 1) % this->DIM;
       leaf->right->left = nullptr;  // Sets the left child of the child node to null
       leaf->right->right = nullptr; // Sets the right child of the child node to null
     }
@@ -105,7 +105,7 @@ KDNode *KDTree::deleteNode(std::vector<int> point, KDNode *leaf)
 
   if (point == leaf->vector)
   {
-    KDTree tree;
+    KDTree tree(this->DIM);
     tree.insert(leaf->vector, leaf);
     if (leaf->right != nullptr)
     {

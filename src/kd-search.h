@@ -1,3 +1,5 @@
+#pragma once
+
 #include "kd-tree.h"
 
 class SearchStrategies

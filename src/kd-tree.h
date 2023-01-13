@@ -1,8 +1,7 @@
+#include <memory>
 #include "iostream"
 #include "vector"
-
-// for sprint-1 we only talk about vector with 2 dimension
-const int DIM = 2;
+#pragma once
 
 class KDTree;
 
@@ -29,10 +28,12 @@ class KDTree
 
     // public methods are for external use, it hides implementation details.
 public:
+    int DIM;
     // Constructor, points root to null.
-    KDTree()
+    KDTree(int dims)
     {
       root = nullptr;
+      DIM = dims;
     }
 
     // insert a vector into the kd-tree
@@ -51,7 +52,7 @@ public:
     }
 
     // this method creats a KD-Tree and it inserts all the points from the file to the tree
-    static std::unique_ptr<KDTree> createKDTreeFromFile(std::string file_name);
+    static std::unique_ptr<KDTree> createKDTreeFromFile(std::string file_name, int dims);
 
 private:
     // root of the tree
