@@ -1,0 +1,16 @@
+#include "kd-tree.h"
+
+class SearchStrategies
+{
+public:
+   std::vector<int> findMin(int dim, KDTree tree);
+   std::vector<int> findKNN(KDTree tree, const std::vector<int> &point);
+
+private:
+    // private method returns the vector which has the minimum number of the given dimension
+    KDNode *findMin(int dim, KDNode *leaf);
+    // private returns minimum KDNode in the vector
+    static KDNode *minOfPoints(const std::vector<KDNode *> &points, int dim);
+    KDNode *findKNN(KDNode *node, const std::vector<int> &point, double &best_dist, KDNode *curr_best);
+    static double eucledian_distance(std::vector<int> point1, std::vector<int> point2);
+};
