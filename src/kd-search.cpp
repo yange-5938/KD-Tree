@@ -47,22 +47,28 @@ KDNode *SearchStrategies::minOfPoints(const std::vector<KDNode *> &points, int d
 }
 
 std::vector<int> SearchStrategies::findMin(int dim, KDTree tree) {
-  return this->findMin(dim, tree.root)->vector; //TODO: check full nullptr
+  return findMin(dim, tree.root)->vector; //TODO: check full nullptr
 }
 
 std::vector<int> SearchStrategies::findKNN(KDTree tree, const std::vector<int> &point) {
   double inf = std::numeric_limits<double>::infinity();
-  return this->findKNN(tree.root, point, inf, nullptr)->vector; // TODO: check for nullptr
+  return findKNN(tree.root, point, inf, nullptr)->vector; // TODO: check for nullptr
 }
 
 KDNode *SearchStrategies::findKNN(KDNode *node, const std::vector<int> &point, double &best_dist, KDNode *curr_best) {
   if (!node) {
     return curr_best;
   }
-  best_dist = std::min(best_dist, eucledian_distance(node->vector, point));
+  if (auto dist = eucledian_distance(node->vector, point) < best_dist)
+  {
+    curr_best = node;
+    best_dist = dist;
+  }
   auto cuttingEdge = node->cuttingEdge;
   char choice = 0;
-  if (point[cuttingEdge] <= node->vector[cuttingEdge])
+  auto el1 = point[cuttingEdge]; //TODO: use better descriptive names
+  auto el2 = node->vector[cuttingEdge]; //TODO: use better descriptive names
+  if (el1 <= el2)
   {
     findKNN(node->left, point, best_dist, curr_best);
   }
@@ -71,9 +77,19 @@ KDNode *SearchStrategies::findKNN(KDNode *node, const std::vector<int> &point, d
     choice = 1;
     findKNN(node->right, point, best_dist, curr_best);
   }
-  if (choice && ) {
 
+  if (abs(el2 - el1) <= best_dist)
+  {
+    if (choice){
+      findKNN(node->left, point, best_dist, curr_best);
+    }
+    else
+    {
+      findKNN(node->right, point, best_dist, curr_best);
+    }
   }
+
+  return curr_best;
 }
 
 double SearchStrategies::eucledian_distance(std::vector<int> point1, std::vector<int> point2) {

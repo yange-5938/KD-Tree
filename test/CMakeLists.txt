@@ -1,0 +1,1 @@
+add_executable(test test-runner.cpp kd-search.test.cpp kd-tree.test.cpp)

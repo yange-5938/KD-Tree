@@ -94,6 +94,8 @@ void KDTree::insert(std::vector<int> vec, KDNode *leaf)
   }
 }
 
+#include "kd-search.h"
+class SearchStrategies;
 KDNode *KDTree::deleteNode(std::vector<int> point, KDNode *leaf)
 {
   if (leaf == nullptr)
@@ -103,14 +105,16 @@ KDNode *KDTree::deleteNode(std::vector<int> point, KDNode *leaf)
 
   if (point == leaf->vector)
   {
+    KDTree tree;
+    tree.insert(leaf->vector, leaf);
     if (leaf->right != nullptr)
     {
-      leaf->vector = findMin(leaf->cuttingEdge, leaf->right)->vector;
+      leaf->vector =  SearchStrategies::findMin(leaf->cuttingEdge, tree);
       leaf->right = deleteNode(leaf->vector, leaf->right);
     }
     else if (leaf->left != nullptr)
     {
-      leaf->vector = findMin(leaf->cuttingEdge, leaf->left)->vector;
+      leaf->vector = SearchStrategies::findMin(leaf->cuttingEdge, tree);
       leaf->right = deleteNode(leaf->vector, leaf->left);
       leaf->left = nullptr;
     }
@@ -128,46 +132,4 @@ KDNode *KDTree::deleteNode(std::vector<int> point, KDNode *leaf)
     leaf->right = deleteNode(point, leaf->right);
   }
   return leaf;
-}
-
-int main()
-{
-    // creates kd-tree from file
-    auto kdt = KDTree::createKDTreeFromFile("data/points.csv");
-
-    // print it to terminal
-    kdt->printKDT();
-
-    // print the minumun vector in each dimension
-    auto x = kdt->findMin(0);
-    auto y = kdt->findMin(1);
-    std::cout << "min Point on dimension 0 is: [" << x->vector[0] << "," << x->vector[1] << "]"
-              << "\n";
-    std::cout << "min Point on dimension 1 is: [" << y->vector[0] << "," << y->vector[1] << "]"
-              << "\n";
-
-
-    // delete a vector to demonstrate
-    std::cout << "now we demonstrate the delete node function, type in a 2d-vector to delete: \n";
-    std::cout << "type the first cordinate: \n";
-    int first;
-    std::cin >> first;
-
-    std::cout << "now type the second cordinate: \n";
-    int second;
-    std::cin >> second;
-    try
-    {
-        kdt->deleteNode({first,
-                         second});
-    }
-    catch (
-        const char *msg)
-    {
-        std::cout << msg << "\n";
-        return 1;
-    }
-
-    // print the tree again after the deletion
-    kdt->printKDT();
 }
