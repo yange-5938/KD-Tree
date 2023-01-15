@@ -1,0 +1,1 @@
+/usr/bin/clang++ -g CMakeFiles/Google_Tests_run.dir/kd-tree.test.cpp.o CMakeFiles/Google_Tests_run.dir/kd-search.test.cpp.o -o Google_Tests_run  ../lib/libgtest.a ../lib/libgtest_main.a ../src/libkd-tree.a ../lib/libgtest.a -lpthread 

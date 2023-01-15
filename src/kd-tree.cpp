@@ -52,7 +52,12 @@ void KDTree::printKDT(const std::string &prefix, const KDNode *node, bool isLeft
     std::cout << (isLeft ? "├─l─" : "└─r─");
 
     // print the value of the node
-    std::cout << "(" << node->vector.at(0) << " , " << node->vector.at(1) << ")" << std::endl;
+    std::cout << "( " << node->vector.at(0);
+    for (int i = 1; i < node->vector.size(); ++i)
+    {
+      std::cout << ", " << node->vector[i];
+    }
+    std::cout << " )" << "\n";
 
     // enter the next tree level - left and right branch
     printKDT(prefix + (isLeft ? "│   " : "    "), node->left, true);
@@ -106,7 +111,7 @@ KDNode *KDTree::deleteNode(std::vector<int> point, KDNode *leaf)
   if (point == leaf->vector)
   {
     KDTree tree(this->DIM);
-    tree.insert(leaf->vector, leaf);
+    tree.insert(leaf->vector);
     if (leaf->right != nullptr)
     {
       leaf->vector =  SearchStrategies::findMin(leaf->cuttingEdge, tree);

@@ -11,6 +11,9 @@ class KDTree;
 class KDNode
 {
 public:
+    KDNode() {
+      this->vector = {1,2,3};
+    }
     static KDNode *minOfPoints(const std::vector<KDNode *> &points, int dim);
     std::vector<int> vector;
 private:
@@ -38,6 +41,8 @@ public:
 
     // insert a vector into the kd-tree
     void insert(const std::vector<int> &vec);
+
+//    void getVector
 
     // printing the tree in the terminal
     void printKDT()

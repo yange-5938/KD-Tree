@@ -50,18 +50,21 @@ std::vector<int> SearchStrategies::findMin(int dim, KDTree tree) {
   return findMin(dim, tree.root)->vector; //TODO: check full nullptr
 }
 
-std::vector<int> SearchStrategies::findKNN(KDTree tree, const std::vector<int> &point) {
+std::vector<int> SearchStrategies::findNN(KDTree tree, const std::vector<int> &point) {
   double inf = std::numeric_limits<double>::infinity();
-  return findKNN(tree.root, point, inf, nullptr)->vector; // TODO: check for nullptr
+  auto curr_best = std::make_shared<KDNode>();
+  findNN(tree.root, point, inf, curr_best);
+  return curr_best->vector;
 }
 
-KDNode *SearchStrategies::findKNN(KDNode *node, const std::vector<int> &point, double &best_dist, KDNode *curr_best) {
+void SearchStrategies::findNN(const KDNode *node, const std::vector<int> &point, double &best_dist, std::shared_ptr<KDNode>& curr_best) {
   if (!node) {
-    return curr_best;
+    return;
   }
-  if (auto dist = eucledian_distance(node->vector, point) < best_dist)
+
+  if (double dist = eucledian_distance(node->vector, point); dist < best_dist)
   {
-    curr_best = node;
+    *curr_best = *node;
     best_dist = dist;
   }
   auto cuttingEdge = node->cuttingEdge;
@@ -70,26 +73,24 @@ KDNode *SearchStrategies::findKNN(KDNode *node, const std::vector<int> &point, d
   auto el2 = node->vector[cuttingEdge]; //TODO: use better descriptive names
   if (el1 <= el2)
   {
-    findKNN(node->left, point, best_dist, curr_best);
+    findNN(node->left, point, best_dist, curr_best);
   }
   else
   {
     choice = 1;
-    findKNN(node->right, point, best_dist, curr_best);
+    findNN(node->right, point, best_dist, curr_best);
   }
 
   if (abs(el2 - el1) <= best_dist)
   {
     if (choice){
-      findKNN(node->left, point, best_dist, curr_best);
+      findNN(node->left, point, best_dist, curr_best);
     }
     else
     {
-      findKNN(node->right, point, best_dist, curr_best);
+      findNN(node->right, point, best_dist, curr_best);
     }
   }
-
-  return curr_best;
 }
 
 double SearchStrategies::eucledian_distance(std::vector<int> point1, std::vector<int> point2) {
@@ -99,6 +100,8 @@ double SearchStrategies::eucledian_distance(std::vector<int> point1, std::vector
   while (el1 != point1.end())
   {
     sum += pow((*el2 - *el1), 2);
+    el1 = std::next(el1);
+    el2 = std::next(el2);
   }
   return sqrt(sum);
 }

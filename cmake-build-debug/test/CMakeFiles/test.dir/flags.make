@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/clang++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/moar/kd-tree/test/../src
+CXX_INCLUDES = -I/home/moar/kd-tree/test/lib/googletest/googletest/include -I/home/moar/kd-tree/test/lib/googletest/googletest -I/home/moar/kd-tree/test/../src
 
 CXX_FLAGS = -g -std=gnu++2a
 
