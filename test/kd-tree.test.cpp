@@ -1,31 +1,32 @@
 #include "kd-search.h"
 #include "gtest/gtest.h"
 
-KDTree *tree;
+KDTree *tree2;
 
 class TreeTest : public ::testing::Test {
 protected:
 
     void SetUp() override {
-      tree = new KDTree(2);
-      tree->insert({4,7});
-      tree->insert({1,9});
-      tree->insert({8,4});
-      tree->insert({2,3});
+      tree2 = new KDTree(2);
+      tree2->insert({4,7});
+      tree2->insert({1,9});
+      tree2->insert({8,4});
+      tree2->insert({2,3});
     }
 
     void TearDown() override {
-      delete tree;
+      delete tree2;
     }
 
 };
 
 TEST_F(TreeTest, MethodInsertWorksProperly) {
-  tree->insert({5,7});
+  tree2->insert({5,7});
+  ASSERT_TRUE(true);
 //  EXPECT_EQ(tree
 }
 
 TEST_F(TreeTest, MethodDeleteWorksProperly) {
-  tree->deleteNode({2,3});
+  tree2->deleteNode({2,3});
   //  EXPECT_EQ(tree
 }

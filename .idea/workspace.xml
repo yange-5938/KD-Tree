@@ -26,43 +26,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7f38e786-9557-4e04-81a9-9cb225297496" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/test/lib/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/cache-v2-19f6b80d4f347c3bafa5.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/cmakeFiles-v1-1f0e10497c2da9362c1a.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/codemodel-v2-bc6c49c74303932caeb5.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/index-2023-01-13T23-43-32-0067.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/target-test-Debug-cb3bbe164a69b823727e.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeOutput.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeOutput.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TargetDirectories.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TargetDirectories.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/progress.marks" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/progress.marks" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/KD-tree.cbp" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/KD-tree.cbp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/src/CMakeFiles/kd-tree.dir/kd-search.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/src/CMakeFiles/kd-tree.dir/kd-search.cpp.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/src/CMakeFiles/kd-tree.dir/kd-tree.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/src/CMakeFiles/kd-tree.dir/kd-tree.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/src/CMakeFiles/kd-tree.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/src/CMakeFiles/kd-tree.dir/progress.make" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/src/libkd-tree.a" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/src/libkd-tree.a" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/test/CMakeFiles/progress.marks" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/test/CMakeFiles/progress.marks" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/test/CMakeFiles/test.dir/compiler_depend.internal" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/test/CMakeFiles/test.dir/compiler_depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/test/CMakeFiles/test.dir/compiler_depend.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/test/CMakeFiles/test.dir/flags.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/test/CMakeFiles/test.dir/flags.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/test/CMakeFiles/test.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/test/CMakeFiles/test.dir/progress.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/test/CMakeFiles/test.dir/test-runner.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/test/CMakeFiles/test.dir/test-runner.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/test/cmake_install.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/test/cmake_install.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kd-search.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/kd-search.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kd-search.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/kd-search.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kd-tree.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/kd-tree.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kd-tree.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/kd-tree.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/test/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/test/CMakeFiles/Google_Tests_run.dir/compiler_depend.internal" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/test/CMakeFiles/Google_Tests_run.dir/compiler_depend.internal" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/test/CMakeFiles/Google_Tests_run.dir/compiler_depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/test/CMakeFiles/Google_Tests_run.dir/compiler_depend.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/test/CMakeFiles/Google_Tests_run.dir/kd-search.test.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/test/CMakeFiles/Google_Tests_run.dir/kd-search.test.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/test/CMakeFiles/Google_Tests_run.dir/kd-tree.test.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/test/CMakeFiles/Google_Tests_run.dir/kd-tree.test.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/test/CMakeFiles/Google_Tests_run.dir/kd-tree.test.cpp.o.d" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/test/CMakeFiles/Google_Tests_run.dir/kd-tree.test.cpp.o.d" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/kd-search.test.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/kd-search.test.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/kd-tree.test.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test/kd-tree.test.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/lib/googletest" beforeDir="false" afterPath="$PROJECT_DIR$/test/lib/googletest" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/lib/googletest/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/test/lib/googletest/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/lib/googletest/googlemock/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/test/lib/googletest/googlemock/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/lib/googletest/googletest/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/test/lib/googletest/googletest/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/test-runner.cpp" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -117,7 +96,7 @@
       <recent name="\\wsl$\Ubuntu-20.04\home\moar\kd-tree\test" />
     </key>
   </component>
-  <component name="RunManager" selected="Google Test.SearchStrategiesTest.MethodBarDoesAbc">
+  <component name="RunManager" selected="Google Test.Google_Tests_run">
     <configuration default="true" type="BIBTEX_RUN_CONFIGURATION" factoryName="LaTeX configuration factory">
       <texify-bibtex>
         <compiler />
@@ -205,7 +184,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1673652869556</updated>
-      <workItem from="1673652873416" duration="10083000" />
+      <workItem from="1673652873416" duration="10587000" />
     </task>
     <servers />
   </component>
