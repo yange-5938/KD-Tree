@@ -3,6 +3,7 @@
 #include "limits"
 #include "cmath"
 
+
 KDNode* SearchStrategies::findMin(int dim, KDNode *leaf)
 {
   if (leaf == nullptr)

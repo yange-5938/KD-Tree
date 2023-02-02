@@ -12,4 +12,4 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 # add_subdirectory(test)
 
 
-add_executable(main src/main.cpp src/kd-tree.cpp)
+add_executable(main src/main.cpp src/kd-tree.cpp src/kd-search.cpp)
