@@ -1,1 +1,0 @@
-/usr/bin/clang++ -g CMakeFiles/test.dir/test-runner.cpp.o CMakeFiles/test.dir/kd-search.test.cpp.o CMakeFiles/test.dir/kd-tree.test.cpp.o -o test  ../src/libkd-tree.a 

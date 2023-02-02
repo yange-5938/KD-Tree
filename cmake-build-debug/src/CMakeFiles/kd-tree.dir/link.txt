@@ -1,2 +1,0 @@
-/usr/local/bin/llvm-ar qc libkd-tree.a CMakeFiles/kd-tree.dir/kd-tree.cpp.o CMakeFiles/kd-tree.dir/kd-search.cpp.o
-/usr/local/bin/llvm-ranlib libkd-tree.a

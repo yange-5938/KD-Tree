@@ -8,133 +8,172 @@
 #include <memory>
 #include "kd-tree.h"
 
-void KDTree::insert(const std::vector<int> &vec)
-  {
-    if (root != nullptr)
-    {
-      insert(vec, root);
-    }
-    else
-    {
-      root = new KDNode;
-      root->cuttingEdge = 0;
-      root->vector = vec;
-      root->left = nullptr;
-      root->right = nullptr;
-    }
-  }
-
-std::unique_ptr<KDTree> KDTree::createKDTreeFromFile(std::string file_name, int dims)
-  {
-    auto tree = std::make_unique<KDTree>(dims);
-    std::string line;
-    std::ifstream my_file(file_name);
-    int x, y;
-    while (std::getline(my_file, line))
-    {
-        std::replace(line.begin(), line.end(), ',', ' ');
-        std::stringstream line_stream(line);
-
-        line_stream >> x >> y;
-
-        tree->insert({x,
-                      y});
-    }
-    return tree;
-  }
-
-void KDTree::printKDT(const std::string &prefix, const KDNode *node, bool isLeft)
+// Constructor,
+// points root to null.
+// pass in the dimention
+KDTree::KDTree(int dim)
+    : DIM(dim)
 {
-  if (node != nullptr)
-  {
-    std::cout << prefix;
-
-    std::cout << (isLeft ? "├─l─" : "└─r─");
-
-    // print the value of the node
-    std::cout << "( " << node->vector.at(0);
-    for (int i = 1; i < node->vector.size(); ++i)
-    {
-      std::cout << ", " << node->vector[i];
-    }
-    std::cout << " )" << "\n";
-
-    // enter the next tree level - left and right branch
-    printKDT(prefix + (isLeft ? "│   " : "    "), node->left, true);
-    printKDT(prefix + (isLeft ? "│   " : "    "), node->right, false);
-  }
+    root = nullptr;
 }
 
+// insert a vector into the kd-tree
+void KDTree::insert(std::vector<int> vec)
+{
+    if (root != nullptr)
+        insert(vec, root);
+    else
+    {
+        root = new KDNode;
+        root->cuttingEdge = 0;
+        root->vector = vec;
+        root->left = nullptr;
+        root->right = nullptr;
+    }
+}
+// private method inserts a vector into the kd-tree
 void KDTree::insert(std::vector<int> vec, KDNode *leaf)
 {
-  if (vec[leaf->cuttingEdge] < leaf->vector[leaf->cuttingEdge])
-  {
-    if (leaf->left != nullptr)
+    if (vec[leaf->cuttingEdge] < leaf->vector[leaf->cuttingEdge])
     {
-      insert(vec, leaf->left);
+        if (leaf->left != nullptr)
+            insert(vec, leaf->left);
+        else
+        {
+            leaf->left = new KDNode;
+            leaf->left->vector = vec;
+            leaf->left->cuttingEdge = (leaf->cuttingEdge + 1) % DIM;
+            leaf->left->left = nullptr;  // Sets the left child of the child node to null
+            leaf->left->right = nullptr; // Sets the right child of the child node to null
+        }
     }
-    else
+    else if (vec[leaf->cuttingEdge] >= leaf->vector[leaf->cuttingEdge])
     {
-      leaf->left = new KDNode;
-      leaf->left->vector = vec;
-      leaf->left->cuttingEdge = (leaf->cuttingEdge + 1) % this->DIM;
-      leaf->left->left = nullptr;  // Sets the left child of the child node to null
-      leaf->left->right = nullptr; // Sets the right child of the child node to null
+        if (leaf->right != nullptr)
+            insert(vec, leaf->right);
+        else
+        {
+            leaf->right = new KDNode;
+            leaf->right->vector = vec;
+            leaf->right->cuttingEdge = (leaf->cuttingEdge + 1) % DIM;
+            leaf->right->left = nullptr;  // Sets the left child of the child node to null
+            leaf->right->right = nullptr; // Sets the right child of the child node to null
+        }
     }
-  }
-  else if (vec[leaf->cuttingEdge] >= leaf->vector[leaf->cuttingEdge])
-  {
-    if (leaf->right != nullptr)
-    {
-      insert(vec, leaf->right);
-    }
-    else
-    {
-      leaf->right = new KDNode;
-      leaf->right->vector = vec;
-      leaf->right->cuttingEdge = (leaf->cuttingEdge + 1) % this->DIM;
-      leaf->right->left = nullptr;  // Sets the left child of the child node to null
-      leaf->right->right = nullptr; // Sets the right child of the child node to null
-    }
-  }
 }
 
-#include "kd-search.h"
-class SearchStrategies;
+// printing the tree in the terminal
+void KDTree::printKDT()
+{
+    printKDT("", this->root, true);
+}
+// private method prints the kd-tree in terminal
+void KDTree::printKDT(const std::string &prefix,
+                      const KDNode *node, bool isLeft)
+{
+    if (node != nullptr)
+    {
+        std::cout << prefix;
+
+        std::cout << (isLeft ? "├─l─" : "└─r─");
+
+        // print the value of the node
+        std::cout << "(" << node->vector.at(0) << " , " << node->vector.at(1)<< " , "  << ")" << std::endl;
+
+        // enter the next tree level - left and right branch
+        printKDT(prefix + (isLeft ? "│   " : "    "), node->left, true);
+        printKDT(prefix + (isLeft ? "│   " : "    "), node->right, false);
+    }
+}
+
+// delete the node, which stores the exactly same vector
+KDNode *KDTree::deleteNode(std::vector<int> point)
+{
+    return deleteNode(point, this->root);
+}
+
+// private method deletes the node, which stores the exactly same vector
 KDNode *KDTree::deleteNode(std::vector<int> point, KDNode *leaf)
 {
-  if (leaf == nullptr)
-  {
-    throw "point not found!";
-  }
+    if (leaf == nullptr)
 
-  if (point == leaf->vector)
-  {
-    KDTree tree(this->DIM);
-    tree.insert(leaf->vector);
-    if (leaf->right != nullptr)
+        throw "point not found!";
+
+    if (point == leaf->vector)
     {
-      leaf->vector =  SearchStrategies::findMin(leaf->cuttingEdge, tree);
-      leaf->right = deleteNode(leaf->vector, leaf->right);
+        if (leaf->right != nullptr)
+        {
+            leaf->vector = findMin(leaf->cuttingEdge, leaf->right)->vector;
+            leaf->right = deleteNode(leaf->vector, leaf->right);
+        }
+        else if (leaf->left != nullptr)
+        {
+            leaf->vector = findMin(leaf->cuttingEdge, leaf->left)->vector;
+            leaf->right = deleteNode(leaf->vector, leaf->left);
+            leaf->left = nullptr;
+        }
+        else
+        {
+            leaf = nullptr;
+        }
     }
-    else if (leaf->left != nullptr)
+    else if (point[leaf->cuttingEdge] < leaf->vector[leaf->cuttingEdge])
     {
-      leaf->vector = SearchStrategies::findMin(leaf->cuttingEdge, tree);
-      leaf->right = deleteNode(leaf->vector, leaf->left);
-      leaf->left = nullptr;
+        leaf->left = deleteNode(point, leaf->left);
     }
     else
     {
-      leaf = nullptr;
+        leaf->right = deleteNode(point, leaf->right);
     }
-  }
-  else if (point[leaf->cuttingEdge] < leaf->vector[leaf->cuttingEdge])
-  {
-    leaf->left = deleteNode(point, leaf->left);
-  }
-  else
-  {
-    leaf->right = deleteNode(point, leaf->right);
-  }
-  return leaf;
+    return leaf;
+}
+
+// private returns minimun KDNode in the vector
+KDNode *KDTree::minOfPoints(std::vector<KDNode *> points, int dim)
+{
+    KDNode *min_el = nullptr;
+    for (auto point : points)
+    {
+        if (min_el == nullptr)
+        {
+            min_el = point;
+        }
+        else if (point != nullptr)
+        {
+            if (point->vector[dim] < min_el->vector[dim])
+            {
+                min_el = point;
+            }
+        }
+    }
+    return min_el;
+}
+
+// return the vector which has the minumun number of the given dimension
+KDNode *KDTree::findMin(int dim)
+{
+    return findMin(dim, root);
+}
+
+// private method returns the vector which has the minumun number of the given dimension
+KDNode *KDTree::findMin(int dim, KDNode *leaf)
+{
+    if (leaf == nullptr)
+        return nullptr;
+
+    if (dim == leaf->cuttingEdge)
+    {
+        if (leaf->left == nullptr)
+            return leaf;
+        else
+            return findMin(dim, leaf->left);
+    }
+    else
+    {
+
+        return KDTree::minOfPoints({findMin(dim, leaf->right),
+                                    findMin(dim, leaf->left),
+                                    leaf},
+                                   dim);
+    }
 }
