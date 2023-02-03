@@ -4,7 +4,7 @@
 #include "kd-search.h"
 #include "helper.h"
 
-std::vector<int> SearchStrategies::findNN(KDTree tree, const std::vector<int> &point)
+std::vector<int> SearchStrategies::findNN(const KDTree &tree, const std::vector<int> &point)
 {
     double inf = std::numeric_limits<double>::infinity();
     auto curr_best = std::make_shared<KDNode>();

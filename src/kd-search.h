@@ -10,7 +10,7 @@ private:
 
 public:
     // find the nearest neighbor of a point in given points
-    static std::vector<int> findNN(KDTree tree, const std::vector<int> &point);
+    static std::vector<int> findNN(const KDTree &tree, const std::vector<int> &point);
 };
 
 // return the eucledian distance of two vecotrs
