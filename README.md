@@ -6,7 +6,7 @@
 ## How to build and run example
 
 ```console
-$ cd build && cmake ..
+$ mkdir && cd build && cmake ..
 $ make
 $ ./main
 ```
