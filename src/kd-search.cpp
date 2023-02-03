@@ -58,7 +58,7 @@ double eucledian_distance(std::vector<int> point1, std::vector<int> point2)
     auto el2 = point2.begin();
     while (el1 != point1.end())
     {
-        sum += pow((*el2 - *el1), 2);
+        sum += (*el2 - *el1)*(*el2 - *el1);
         el1 = std::next(el1);
         el2 = std::next(el2);
     }
