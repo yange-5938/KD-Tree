@@ -20,16 +20,13 @@ TEST(treetest, KNN_search) {
   GTEST_ASSERT_EQ(a, b);
 } */
 
-TEST(treetest, find_min) {
+TEST(tree_test, find_min) {
   std::vector<std::vector<int>> points = {{8, 8, 3}, {10, 4, 16}, {9, 12, 24},{5,8,6},{2,5,1}};
   auto kdt = createKDTreeFromVectors(points,3);
 
   auto a = kdt->findMin(0)->vector;
   std::vector<int> b = {2, 5, 1};
-  std::cout<<"[ Message  ] This is the KD-Tree for test:"<<std::endl;
-  kdt->printKDT();
   GTEST_ASSERT_EQ(a, b);
-  //ASSERT_EQ(2,3);
 }
 
 int main(int argc, char *argv[]) {
