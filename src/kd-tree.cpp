@@ -78,7 +78,10 @@ void KDTree::printKDT(const std::string &prefix,
         std::cout << (isLeft ? "├─l─" : "└─r─");
 
         // print the value of the node
-        std::cout << "(" << node->vector.at(0) << " , " << node->vector.at(1)<< " , "  << ")" << std::endl;
+        std::cout << "(";
+        for (int i = 0; i < node->vector.size(); i++) 
+            std::cout << node->vector.at(i) << " , ";
+        std::cout << ")" << std::endl;
 
         // enter the next tree level - left and right branch
         printKDT(prefix + (isLeft ? "│   " : "    "), node->left, true);
