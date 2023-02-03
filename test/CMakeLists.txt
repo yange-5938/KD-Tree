@@ -1,14 +1,20 @@
-# 'Google_test' is the subproject name
-project(Google_tests)
+#cmake_minimum_required(VERSION 3.14)
+# as https://github.com/google/googletest/tree/main/googletest
 
-# 'lib' is the folder with Google Test sources
-# add_subdirectory(lib)
-include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
+# project(gtest VERSION ${GOOGLETEST_VERSION} LANGUAGES CXX C)
 
-include_directories(../src)
+include(FetchContent)
+FetchContent_Declare(
+  googletest
+  # Specify the commit you depend on and update it regularly.
+  URL https://github.com/google/googletest/archive/5376968f6948923e2411081fd9372e71a59d8e77.zip
+)
+# For Windows: Prevent overriding the parent project's compiler/linker settings
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+FetchContent_MakeAvailable(googletest)
 
-# 'Google_Tests_run' is the target name
-# 'test1.cpp tests2.cpp' are source files with tests
-add_executable(Google_Tests_run kd-tree.test.cpp kd-search.test.cpp)
-target_link_libraries(Google_Tests_run gtest gtest_main kd-tree)
-
+# Now simply link against gtest or gtest_main as needed. Eg
+add_executable(kd-search-test kd-search-test.cpp ../src/kd-tree.cpp ../src/kd-search.cpp ../src/helper.cpp) # add this executable
+target_link_libraries(kd-search-test gtest)
+# add_test(NAME kd-search-test COMMAND )
+#add_test(NAME example_test COMMAND kd-search-test)

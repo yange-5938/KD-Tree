@@ -48,6 +48,17 @@ std::unique_ptr<KDTree> createKDTreeFromFile(std::string file_name, int dim)
     return tree;
 }
 
+// this method creats a KD-Tree and it inserts all the points from a vector
+std::unique_ptr<KDTree> createKDTreeFromVectors(std::vector<std::vector<int>> points, int dim)
+{
+    auto tree = std::make_unique<KDTree>(dim);
+    for (int i = 0; i < points.size(); i++)
+    {
+        tree->insert(points.at(i));
+    }
+    return tree;
+}
+
 
 // this method is deprecated
 // this method creats a 2d KD-Tree and it inserts all the points from the file to the tree
