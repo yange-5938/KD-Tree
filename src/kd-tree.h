@@ -33,11 +33,14 @@ private:
     KDNode *findMin(int dim, KDNode *leaf);
     KDNode *deleteNode(std::vector<int> point, KDNode *leaf);
 
+    friend class SearchStrategies;
+
 public:
+
     const int DIM;
     // Constructor
     KDTree(int); 
-
+    
     // default Constructor without passing dimension is not allow
     KDTree() = delete;
     void insert(std::vector<int> vec);

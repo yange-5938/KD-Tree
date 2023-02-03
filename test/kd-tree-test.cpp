@@ -3,7 +3,7 @@
 #include <gtest/gtest.h>
 
 
-TEST(tree_test, find_min)
+TEST(tree_test, findMin)
 {
   // test for 3d tree
   std::vector<std::vector<int>> points = {{8, 8, 0}, {10, 1, 16}, {9, 12, 24}, {5, 8, 6}, {2, 5, 1}};

@@ -36,6 +36,14 @@ TEST(search_test, eucledian_distance)
   EXPECT_EQ(dx, sqrt(3));
 }
 
+TEST(search_test, findNN)
+{
+  std::vector<std::vector<int>> points = {{4, 7}, {1, 9}, {8, 4}, {2, 3}};
+  auto kdt = createKDTreeFromVectors(points, 2);
+  SearchStrategies s;
+  EXPECT_EQ(s.findNN(*kdt, {2, 4}), std::vector<int>({2, 3}));
+  EXPECT_EQ(s.findNN(*kdt, {9, 5}), std::vector<int>({8, 4}));
+}
 
 int main(int argc, char *argv[])
 {

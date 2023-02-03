@@ -3,8 +3,7 @@
 #include "limits"
 #include "cmath"
 
-
-KDNode* SearchStrategies::findMin(int dim, KDNode *leaf)
+KDNode *SearchStrategies::findMin(int dim, KDNode *leaf)
 {
   if (leaf == nullptr)
     return nullptr;
@@ -20,12 +19,11 @@ KDNode* SearchStrategies::findMin(int dim, KDNode *leaf)
   {
 
     return minOfPoints({findMin(dim, leaf->right),
-                          findMin(dim, leaf->left),
-                          leaf},
-                         dim);
+                        findMin(dim, leaf->left),
+                        leaf},
+                       dim);
   }
 }
-
 
 KDNode *SearchStrategies::minOfPoints(const std::vector<KDNode *> &points, int dim)
 {
@@ -47,19 +45,23 @@ KDNode *SearchStrategies::minOfPoints(const std::vector<KDNode *> &points, int d
   return min_el;
 }
 
-std::vector<int> SearchStrategies::findMin(int dim, KDTree tree) {
-  return findMin(dim, tree.root)->vector; //TODO: check full nullptr
+std::vector<int> SearchStrategies::findMin(int dim, KDTree tree)
+{
+  return findMin(dim, tree.root)->vector; // TODO: check full nullptr
 }
 
-std::vector<int> SearchStrategies::findNN(KDTree tree, const std::vector<int> &point) {
+std::vector<int> SearchStrategies::findNN(KDTree tree, const std::vector<int> &point)
+{
   double inf = std::numeric_limits<double>::infinity();
   auto curr_best = std::make_shared<KDNode>();
   findNN(tree.root, point, inf, curr_best);
   return curr_best->vector;
 }
 
-void SearchStrategies::findNN(const KDNode *node, const std::vector<int> &point, double &best_dist, std::shared_ptr<KDNode>& curr_best) {
-  if (!node) {
+void SearchStrategies::findNN(const KDNode *node, const std::vector<int> &point, double &best_dist, std::shared_ptr<KDNode> &curr_best)
+{
+  if (!node)
+  {
     return;
   }
 
@@ -70,8 +72,8 @@ void SearchStrategies::findNN(const KDNode *node, const std::vector<int> &point,
   }
   auto cuttingEdge = node->cuttingEdge;
   char choice = 0;
-  auto el1 = point[cuttingEdge]; //TODO: use better descriptive names
-  auto el2 = node->vector[cuttingEdge]; //TODO: use better descriptive names
+  auto el1 = point[cuttingEdge];        // TODO: use better descriptive names
+  auto el2 = node->vector[cuttingEdge]; // TODO: use better descriptive names
   if (el1 <= el2)
   {
     findNN(node->left, point, best_dist, curr_best);
@@ -84,7 +86,8 @@ void SearchStrategies::findNN(const KDNode *node, const std::vector<int> &point,
 
   if (abs(el2 - el1) <= best_dist)
   {
-    if (choice){
+    if (choice)
+    {
       findNN(node->left, point, best_dist, curr_best);
     }
     else
@@ -94,7 +97,8 @@ void SearchStrategies::findNN(const KDNode *node, const std::vector<int> &point,
   }
 }
 
-double SearchStrategies::eucledian_distance(std::vector<int> point1, std::vector<int> point2) {
+double SearchStrategies::eucledian_distance(std::vector<int> point1, std::vector<int> point2)
+{
   double sum = 0;
   auto el1 = point1.begin();
   auto el2 = point2.begin();

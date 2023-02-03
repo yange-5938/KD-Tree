@@ -17,6 +17,7 @@ KDTree::KDTree(int dim)
     root = nullptr;
 }
 
+
 // insert a vector into the kd-tree
 void KDTree::insert(std::vector<int> vec)
 {
