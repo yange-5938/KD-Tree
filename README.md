@@ -13,6 +13,7 @@ $ ./main
 ### how to see test results
 
 ```console
+$ ./test/kd-tree-test
 $ ./test/kd-search-test
 ```
 

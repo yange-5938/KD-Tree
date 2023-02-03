@@ -15,6 +15,9 @@ FetchContent_MakeAvailable(googletest)
 
 # Now simply link against gtest or gtest_main as needed. Eg
 add_executable(kd-search-test kd-search-test.cpp ../src/kd-tree.cpp ../src/kd-search.cpp ../src/helper.cpp) # add this executable
+add_executable(kd-tree-test kd-tree-test.cpp ../src/kd-tree.cpp ../src/helper.cpp) # add this executable
+
 target_link_libraries(kd-search-test gtest)
+target_link_libraries(kd-tree-test gtest)
 # add_test(NAME kd-search-test COMMAND )
 #add_test(NAME example_test COMMAND kd-search-test)
