@@ -3,14 +3,19 @@
 ## what's a kd-tree?
 [kd-tree](https://en.wikipedia.org/wiki/K-d_tree) is like a normal tree, but it's kd.
 
-## How to build
+## How to build and run example
 
 ```console
-$ cd build
-$ cmake ..
+$ cd build && cmake ..
 $ make
 $ ./main
 ```
+### how to see test results
+
+```console
+$ ./test/kd-search-test
+```
+
 
 we use data/points.csv as a input file, for demonstration purpose we use 3d points in the as input, but the implementation supports any dimention.
 
