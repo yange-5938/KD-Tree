@@ -9,7 +9,6 @@ int main()
 
     // print it to terminal
     kdt->printKDT();
-            
 
     // print the minumun vector in each dimension
     auto x = kdt->findMin(0);
@@ -22,21 +21,10 @@ int main()
     std::cout << "min Point on dimension 1 is: [" << z->vector[0] << "," << z->vector[1] << "," << z->vector[2] << "]"
               << "\n";
     // delete a vector to demonstrate
-    std::cout << "now we demonstrate the delete node function, type in a 3d-vector to delete: \n";
-    std::cout << "type the first cordinate: \n";
-    int first;
-    std::cin >> first;
-
-    std::cout << "now type the second cordinate: \n";
-    int second;
-    std::cin >> second;
-
-    std::cout << "now type the thrid cordinate: \n";
-    int third;
-    std::cin >> third;
+    // we now delete a vector, namely {40,20,22}
     try
     {
-        kdt->deleteNode({first, second, third});
+        kdt->deleteNode({44, 20, 22});
     }
     catch (
         const char *msg)
@@ -47,4 +35,11 @@ int main()
 
     // print the tree again after the deletion
     kdt->printKDT();
+
+    // run some KNN search
+    SearchStrategies search;
+    std::vector<int> point = {10, 20, 0};
+    std::vector<int> NN = search.findNN(*kdt, point);
+    point = {24, 21, 2};
+    NN = search.findNN(*kdt, point);
 }

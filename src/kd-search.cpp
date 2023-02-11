@@ -4,7 +4,7 @@
 #include "kd-search.h"
 #include "helper.h"
 
-std::vector<int> SearchStrategies::findNN(KDTree tree, const std::vector<int> &point)
+std::vector<int> SearchStrategies::findNN(const KDTree &tree, const std::vector<int> &point)
 {
     double inf = std::numeric_limits<double>::infinity();
     auto curr_best = std::make_shared<KDNode>();
@@ -58,7 +58,7 @@ double eucledian_distance(std::vector<int> point1, std::vector<int> point2)
     auto el2 = point2.begin();
     while (el1 != point1.end())
     {
-        sum += pow((*el2 - *el1), 2);
+        sum += (*el2 - *el1)*(*el2 - *el1);
         el1 = std::next(el1);
         el2 = std::next(el2);
     }

@@ -6,7 +6,7 @@
 ## How to build and run example
 
 ```console
-$ cd build && cmake ..
+$ mkdir build && cd build && cmake ..
 $ make
 $ ./main
 ```
@@ -17,8 +17,19 @@ $ ./test/kd-tree-test
 $ ./test/kd-search-test
 ```
 
-
 we use data/points.csv as a input file, for demonstration purpose we use 3d points in the as input, but the implementation supports any dimention.
+
+
+## Optimization
+
+The Program is optmized, the logs/analysis{}.txt and logs/valgrind{}.out are the log of the cpu profiling and memory usage profiling.
+
+The _original logs are the result running the program without optmization.
+
+The _compile_time logs are the result running the program after optimizing lots of the codes from runtime to compile, by suing constexpr and const.
+
+The _computation logs are the result running the program after optmizing the computation, and avoiding branching etc..
+
 
 ## How to use
 
