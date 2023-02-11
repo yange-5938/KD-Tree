@@ -40,7 +40,8 @@ std::vector<std::vector<int>> createVectorFromFile(const std::string &filename, 
 std::unique_ptr<KDTree> createKDTreeFromVectors(const std::vector<std::vector<int>> &points, const int &dim)
 {
     auto tree = std::make_unique<KDTree>(dim);
-    for (std::size_t i = 0; i < points.size(); i++)
+    std::size_t size_points = points.size();
+    for (std::size_t i = 0; i < size_points; i++)
     {
         tree->insert(points.at(i));
     }
